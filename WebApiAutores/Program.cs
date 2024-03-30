@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace WebApiAutores
 {
     public class Program
@@ -13,6 +15,12 @@ namespace WebApiAutores
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //Base de datos EF
+            builder.Services.AddDbContext<ApplicationDbContext>(options =>{
+                options.UseSqlServer(builder.Configuration.GetConnectionString("AppConnection"));
+            });
+
+            //
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
