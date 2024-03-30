@@ -23,5 +23,11 @@ namespace WebApiAutores.Controllers
                 new Autor { Id = 2, Nombre = "David"}
             };
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(Autor autor)
+        {
+
+        }
     }
 }
