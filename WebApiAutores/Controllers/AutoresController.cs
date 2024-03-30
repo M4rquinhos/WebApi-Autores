@@ -8,6 +8,13 @@ namespace WebApiAutores.Controllers
     [ApiController]
     public class AutoresController : ControllerBase
     {
+        private readonly ApplicationDbContext _context;
+
+        public AutoresController(ApplicationDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public ActionResult<List<Autor>> Get()
         {
