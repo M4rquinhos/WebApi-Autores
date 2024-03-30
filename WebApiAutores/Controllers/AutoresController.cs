@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebApiAutores.Entidades;
 
 namespace WebApiAutores.Controllers
@@ -16,18 +17,17 @@ namespace WebApiAutores.Controllers
         }
 
         [HttpGet]
-        public ActionResult<List<Autor>> Get()
+        public async Task<ActionResult<List<Autor>>> Get()
         {
-            return new List<Autor>() { 
-                new Autor { Id = 1, Nombre = "Marco" },  
-                new Autor { Id = 2, Nombre = "David"}
-            };
+            return await _context.Autores.ToListAsync();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Autor autor)
         {
-
+            _context.Add(autor);
+            await _context.SaveChangesAsync();
+            return Ok();
         }
     }
 }
